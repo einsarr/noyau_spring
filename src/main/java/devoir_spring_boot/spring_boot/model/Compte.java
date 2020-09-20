@@ -9,7 +9,7 @@ public class Compte implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long compte_id;
-    private float montant;
+    private float montant_init;
     private float solde;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -28,12 +28,12 @@ public class Compte implements Serializable {
         this.compte_id = compte_id;
     }
 
-    public float getMontant() {
-        return montant;
+    public float getMontant_init() {
+        return montant_init;
     }
 
-    public void setMontant(float montant) {
-        this.montant = montant;
+    public void setMontant_init(float montant_init) {
+        this.montant_init = montant_init;
     }
 
     public float getSolde() {

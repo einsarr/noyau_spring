@@ -317,6 +317,18 @@
 <script src="/template/dist/js/demo.js"></script>
 <script>
     $(function () {
+        $('#div_retrait').hide();
+        $('#type_operation').change(function () {
+            if(this.value==="Retrait"){
+                $('#div_retrait').show();
+                $('#div_envoi').hide();
+            }
+            if(this.value==="Envoi"){
+                $('#div_retrait').hide();
+                $('#div_envoi').show();
+            }
+        });
+
         $("#example1").DataTable();
         $('#example2').DataTable({
             "paging": true,

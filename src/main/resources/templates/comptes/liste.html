@@ -32,100 +32,26 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
+                        <th>N°</th>
+                        <th>Montant initiale</th>
+                        <th>Solde</th>
+                        <th>Caissier</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 4.0
+                    <tr th:each="cpt:${comptes}">
+                        <td th:text="${cpt.compte_id}"></td>
+                        <td th:text="${cpt.montant_init}"></td>
+                        <td th:text="${cpt.solde}"></td>
+                        <td th:text="${cpt.user.prenom + ' '+ cpt.user.nom}"></td>
+                        <td>
+                            <a class="btn btn-success btn-xs" href="#" th:data="${cpt.compte_id}"
+                                     data-toggle="modal" data-target="#alimenterModal">Alimenter</a>
+                            <a class="btn btn-info btn-xs" href="#" th:data="${cpt.compte_id}"
+                               data-toggle="modal" data-target="#detailsCompteModal"><span class="fas fa-eye"></span></a>
                         </td>
-                        <td>Win 95+</td>
-                        <td> 4</td>
-                        <td>X</td>
                     </tr>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 5.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td>5</td>
-                        <td>C</td>
-                    </tr>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 5.5
-                        </td>
-                        <td>Win 95+</td>
-                        <td>5.5</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 6
-                        </td>
-                        <td>Win 98+</td>
-                        <td>6</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 7</td>
-                        <td>Win XP SP2+</td>
-                        <td>7</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Trident</td>
-                        <td>AOL browser (AOL desktop)</td>
-                        <td>Win XP</td>
-                        <td>6</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Gecko</td>
-                        <td>Firefox 1.0</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.7</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Gecko</td>
-                        <td>Firefox 1.5</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.8</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Gecko</td>
-                        <td>Firefox 2.0</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.8</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Gecko</td>
-                        <td>Firefox 3.0</td>
-                        <td>Win 2k+ / OSX.3+</td>
-                        <td>1.9</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Gecko</td>
-                        <td>Camino 1.0</td>
-                        <td>OSX.2+</td>
-                        <td>1.8</td>
-                        <td>A</td>
-                    </tr>
-
                     </tbody>
                 </table>
             </div>
@@ -141,47 +67,137 @@
 </body>
 </html>
 
-<div class="modal fade" id="modal-default">
-    <div class="modal-dialog">
+
+<div class="modal fade" id="detailsCompteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Default Modal</h4>
+                <h5 class="modal-title" id="confirmModalLabel">Détails du compte</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form enctype="multipart/form-data" action="#" id="form1" method="post">
-                <div class="modal-body">
+            <form id="form2" method="post" action="/medecin/remove">
+                <div class="modal-body" id="contentConfirm">
                     <div class="form-group">
-                        <label for="num_piece" class="col-form-label">Numéro piece:</label>
-                        <input type="text"  class="form-control" id="num_piece">
+                        <label for="montant" class="col-form-label">Montant: 25666 FCFA</label>
                     </div>
-                    <div class="form-group">
-                        <label for="prenom" class="col-form-label">Prénom:</label>
-                        <input  type="text" class="form-control" id="prenom">
-                    </div>
-                    <div class="form-group">
-                        <label for="nom" class="col-form-label">Nom:</label>
-                        <input  type="text" class="form-control" id="nom">
-                    </div>
-                    <div class="form-group">
-                        <label for="tel" class="col-form-label">Téléphone:</label>
-                        <input type="text"  class="form-control" id="tel">
-                    </div>
-
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
-                    <button id="save" type="submit" class="btn btn-primary">Enregister</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Alimenter</button>
                 </div>
-                <input type="hidden"  id="medecinid">
-                <input type="hidden"  name="serviceId" id="serviceId">
+                <input type="hidden" id="medecinId" name="medecinId">
             </form>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
 
 
+
+<div class="modal fade" id="alimenterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Alimenter un compte</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="form2" method="post" action="/medecin/remove">
+                <div class="modal-body" id="contentConfirm">
+                    <div class="form-group">
+                        <label for="montant" class="col-form-label">Montant:</label>
+                        <input type="text"  class="form-control" id="montant">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Alimenter</button>
+                </div>
+                <input type="hidden" id="medecinId" name="medecinId">
+            </form>
+        </div>
+    </div>
+</div>
+
+
+    <div class="modal fade bd-example-modal-lg" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nouveau compte</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form enctype="multipart/form-data" action="#" id="form1" method="post">
+                    <div class="modal-body">
+                        <div id="div_envoi" class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="num_piece" class="col-form-label">Code:</label>
+                                    <input type="text"  class="form-control" id="num_piece" placeholder="CNI de l'envoyeur">
+                                </div>
+                                <div class="form-group">
+                                    <label for="prenom" class="col-form-label">Prénom:</label>
+                                    <input  type="text" class="form-control" id="prenom" placeholder="Prénom du caissier">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nom" class="col-form-label">Nom:</label>
+                                    <input  type="text" class="form-control" id="nom" placeholder="Nom caissier">
+                                </div>
+                                <div class="form-group">
+                                    <label for="montant" class="col-form-label">Numéro contrat:</label>
+                                    <input type="text"  class="form-control" id="montant" placeholder="Numéro contrat">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="tel" class="col-form-label">Username:</label>
+                                    <input type="text"  class="form-control" id="tel" placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="num_piece" class="col-form-label">Password:</label>
+                                    <input type="text"  class="form-control" id="num_piece" placeholder="Mot de passe">
+                                </div>
+                                <div class="form-group">
+                                    <label for="prenom" class="col-form-label">Etat:</label>
+                                    <select name="etat" id="etat" class="form-control">
+                                        <option value="">Selectionner l'etat du compte</option>
+                                        <option value="">Actif</option>
+                                        <option value="">Inactif</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nom" class="col-form-label">Montant initiale:</label>
+                                    <input  type="text" class="form-control" id="nom" placeholder="Montant initiale déposé">
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="div_retrait">
+                            <div class="form-group">
+                                <label for="num_piece" class="col-form-label">Numéro piece:</label>
+                                <input type="text"  class="form-control" id="num_piece" placeholder="Prénom du bénéficiaire">
+                            </div>
+                            <div class="form-group">
+                                <label for="code_envoi" class="col-form-label">Code d'envoi:</label>
+                                <input  type="text" class="form-control" id="code_envoi" placeholder="Code d'envoi">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                        <button id="save" type="submit" class="btn btn-primary">Enregister</button>
+                    </div>
+                    <input type="hidden"  id="medecinid">
+                    <input type="hidden"  name="serviceId" id="serviceId">
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->

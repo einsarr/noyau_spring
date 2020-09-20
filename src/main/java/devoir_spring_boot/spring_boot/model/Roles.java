@@ -13,8 +13,7 @@ public class Roles implements Serializable {
     private long role_id;
     @Column(length = 20)
     private String libelle_role;
-    @Column(length = 7)
-    private String etat_role;
+    private int etat_role;
 
     @ManyToMany(mappedBy = "roles")
     @JsonIgnoreProperties("roles")
@@ -37,11 +36,11 @@ public class Roles implements Serializable {
         this.libelle_role = libelle_role;
     }
 
-    public String getEtat_role() {
+    public int getEtat_role() {
         return etat_role;
     }
 
-    public void setEtat_role(String etat_role) {
+    public void setEtat_role(int etat_role) {
         this.etat_role = etat_role;
     }
 

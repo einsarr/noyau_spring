@@ -15,7 +15,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-envoi">
                             <span class="fas fa-plus-square"></span>Nouveau
                         </button>
                     </div><!-- /.col -->
@@ -32,100 +32,31 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
+                        <th>N°</th>
+                        <th>Code</th>
+                        <th>Date envoi</th>
+                        <th>Date retrait</th>
+                        <th>Frais env</th>
+                        <th>Montant</th>
+                        <th>Caissier env</th>
+                        <th>Caissier retr</th>
+                        <th>Client env</th>
+                        <th>Client retr</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 4.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td> 4</td>
-                        <td>X</td>
+                    <tr th:each="o:${operations}">
+                        <td th:text="${o.operation_id}"></td>
+                        <td th:text="${o.code_envoi}"></td>
+                        <td th:text="${o.date_envoi}"></td>
+                        <td th:text="${o.date_retrait}"></td>
+                        <td th:text="${o.frais_envoi}"></td>
+                        <td th:text="${o.montant_envoi}"></td>
+                        <td th:text="${o.caissier_env.prenom}"></td>
+                        <td th:text="${o.caissier_rec.prenom}"></td>
+                        <td th:text="${o.client_env.prenom}"></td>
+                        <td th:text="${o.client_rec.prenom}"></td>
                     </tr>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 5.0
-                        </td>
-                        <td>Win 95+</td>
-                        <td>5</td>
-                        <td>C</td>
-                    </tr>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 5.5
-                        </td>
-                        <td>Win 95+</td>
-                        <td>5.5</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet
-                            Explorer 6
-                        </td>
-                        <td>Win 98+</td>
-                        <td>6</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 7</td>
-                        <td>Win XP SP2+</td>
-                        <td>7</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Trident</td>
-                        <td>AOL browser (AOL desktop)</td>
-                        <td>Win XP</td>
-                        <td>6</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Gecko</td>
-                        <td>Firefox 1.0</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.7</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Gecko</td>
-                        <td>Firefox 1.5</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.8</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Gecko</td>
-                        <td>Firefox 2.0</td>
-                        <td>Win 98+ / OSX.2+</td>
-                        <td>1.8</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Gecko</td>
-                        <td>Firefox 3.0</td>
-                        <td>Win 2k+ / OSX.3+</td>
-                        <td>1.9</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Gecko</td>
-                        <td>Camino 1.0</td>
-                        <td>OSX.2+</td>
-                        <td>1.8</td>
-                        <td>A</td>
-                    </tr>
-
                     </tbody>
                 </table>
             </div>
@@ -133,40 +64,81 @@
         </div>
         <!-- /.content -->
     </div>
-
-
 </div>
 
 
 </body>
 </html>
 
-<div class="modal fade" id="modal-default">
-    <div class="modal-dialog">
+<div class="modal fade bd-example-modal-lg" id="modal-envoi" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Default Modal</h4>
+                <h4 class="modal-title">Nouvelle opération</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form enctype="multipart/form-data" action="#" id="form1" method="post">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="num_piece" class="col-form-label">Numéro piece:</label>
-                        <input type="text"  class="form-control" id="num_piece">
+                    <div class="col-md-6">
+                        <label for="type_operation">TYPE D'OPERATION</label>
+                        <select name="type_operation" id="type_operation" class="form-control">
+                            <option value="Envoi">Envoi</option>
+                            <option value="Retrait">Retrait</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label for="prenom" class="col-form-label">Prénom:</label>
-                        <input  type="text" class="form-control" id="prenom">
+                    <hr>
+                    <div id="div_envoi" class="row">
+                        <div class="col-md-6">
+                            <h4 class="text-primary">Informations sur l'envoyeur</h4>
+                            <div class="form-group">
+                                <label for="num_piece" class="col-form-label">Numéro piece:</label>
+                                <input type="text"  class="form-control" id="num_piece" placeholder="CNI de l'envoyeur">
+                            </div>
+                            <div class="form-group">
+                                <label for="prenom" class="col-form-label">Prénom:</label>
+                                <input  type="text" class="form-control" id="prenom" placeholder="Prénom de l'envoyeur">
+                            </div>
+                            <div class="form-group">
+                                <label for="nom" class="col-form-label">Nom:</label>
+                                <input  type="text" class="form-control" id="nom" placeholder="Nom de l'envoyeur">
+                            </div>
+                            <div class="form-group">
+                                <label for="montant" class="col-form-label">Montant:</label>
+                                <input type="text"  class="form-control" id="montant" placeholder="Montant à envoyé">
+                            </div>
+                            <div class="form-group">
+                                <label for="tel" class="col-form-label">Téléphone:</label>
+                                <input type="text"  class="form-control" id="tel" placeholder="Téléphone de l'envoyeur">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h4 class="text-info">Informations sur le bénéficiaire</h4>
+                            <div class="form-group">
+                                <label for="num_piece" class="col-form-label">Numéro téléphone:</label>
+                                <input type="text"  class="form-control" id="num_piece" placeholder="Prénom du bénéficiaire">
+                            </div>
+                            <div class="form-group">
+                                <label for="prenom" class="col-form-label">Prénom:</label>
+                                <input  type="text" class="form-control" id="prenom" placeholder="Prénom du bénéficiaire">
+                            </div>
+                            <div class="form-group">
+                                <label for="nom" class="col-form-label">Nom:</label>
+                                <input  type="text" class="form-control" id="nom" placeholder="Nom du bénéficiaire">
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="nom" class="col-form-label">Nom:</label>
-                        <input  type="text" class="form-control" id="nom">
-                    </div>
-                    <div class="form-group">
-                        <label for="tel" class="col-form-label">Téléphone:</label>
-                        <input type="text"  class="form-control" id="tel">
+                    <div id="div_retrait">
+                        <div class="form-group">
+                            <label for="num_piece" class="col-form-label">Numéro piece:</label>
+                            <input type="text"  class="form-control" id="num_piece" placeholder="Prénom du bénéficiaire">
+                        </div>
+                        <div class="form-group">
+                            <label for="code_envoi" class="col-form-label">Code d'envoi:</label>
+                            <input  type="text" class="form-control" id="code_envoi" placeholder="Code d'envoi">
+                        </div>
                     </div>
 
                 </div>
@@ -183,5 +155,7 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+
 
 
