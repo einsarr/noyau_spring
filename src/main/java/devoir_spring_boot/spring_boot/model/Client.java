@@ -1,5 +1,7 @@
 package devoir_spring_boot.spring_boot.model;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,12 +11,16 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long client_id;
     @Column(length = 17)
+    @NotNull
     private String numero_piece;
     @Column(length = 30)
+    @NotNull
     private String nom;
     @Column(length = 40)
+    @NotNull
     private String prenom;
     @Column(length = 16)
+    @NotNull
     private String telephone;
 
     @OneToMany(mappedBy = "client_env")

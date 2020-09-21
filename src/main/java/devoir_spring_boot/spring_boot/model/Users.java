@@ -25,7 +25,7 @@ public class Users {
     @Column(length = 255)
     private String password;
     @Column(length = 10)
-    private String etat;
+    private boolean etat;
     private boolean changed;
     @OneToMany(mappedBy = "caissier_env")
     private List<Operation> caissier_envois;
@@ -33,8 +33,6 @@ public class Users {
     private List<Operation> caissier_recus;
     @OneToOne(mappedBy = "user")
     private Compte compte;
-    @OneToMany(mappedBy = "user")
-    private List<AlimenterCompte> alimenterComptes;
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -100,11 +98,11 @@ public class Users {
         this.password = password;
     }
 
-    public String getEtat() {
+    public boolean getEtat() {
         return etat;
     }
 
-    public void setEtat(String etat) {
+    public void setEtat(boolean etat) {
         this.etat = etat;
     }
 
@@ -138,14 +136,6 @@ public class Users {
 
     public void setCompte(Compte compte) {
         this.compte = compte;
-    }
-
-    public List<AlimenterCompte> getAlimenterComptes() {
-        return alimenterComptes;
-    }
-
-    public void setAlimenterComptes(List<AlimenterCompte> alimenterComptes) {
-        this.alimenterComptes = alimenterComptes;
     }
 
     public List<Roles> getRoles() {

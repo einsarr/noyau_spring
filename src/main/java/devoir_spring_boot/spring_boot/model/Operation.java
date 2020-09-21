@@ -11,23 +11,27 @@ public class Operation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long operation_id;
-    @Column(length = 9)
+    @Column(length = 9,nullable = true)
     private String code_envoi;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(nullable = true)
     private Date date_envoi;
     @Column(length = 10)
     private String type_operation;
+    @Column(nullable = true)
     private float montant_envoi;
+    @Column(nullable = true)
     private float frais_envoi;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(nullable = true)
     private Date date_retrait;
     @Column(columnDefinition = "float default 0")
     private float etat_traitement;
 
     @ManyToOne
-    @JoinColumn(name = "client_env_id",nullable = false)
+    @JoinColumn(name = "client_env_id",nullable = true)
     private Client client_env;
 
     @ManyToOne
@@ -35,7 +39,7 @@ public class Operation implements Serializable {
     private Client client_rec;
 
     @ManyToOne
-    @JoinColumn(name = "caissier_env_id",nullable = false)
+    @JoinColumn(name = "caissier_env_id",nullable = true)
     private Users caissier_env;
 
     @ManyToOne

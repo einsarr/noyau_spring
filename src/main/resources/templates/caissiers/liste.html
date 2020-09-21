@@ -10,22 +10,10 @@
 <div layout:fragment="content">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
-                            <span class="fas fa-plus-square"></span>Nouveau
-                        </button>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
         <!-- /.content-header -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">LISTE DES CLIENTS</h3>
+            <h3 class="card-title">LISTE DES CAISSIERS</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -35,17 +23,19 @@
                     <th>N°</th>
                     <th>Prénom</th>
                     <th>Nom</th>
-                    <th>Numéro piece</th>
-                    <th>Téléphone</th>
+                    <th>Code</th>
+                    <th>Numéro contrat</th>
+                    <th>Etat</th>
                 </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="cl:${clients}">
-                        <td th:text="${cl.client_id}"></td>
-                        <td th:text="${cl.prenom}"></td>
-                        <td th:text="${cl.nom}"></td>
-                        <td th:text="${cl.numero_piece}"></td>
-                        <td th:text="${cl.telephone}"></td>
+                    <tr th:each="c:${caissiers}">
+                        <td th:text="${c.user_id}"></td>
+                        <td th:text="${c.prenom}"></td>
+                        <td th:text="${c.nom}"></td>
+                        <td th:text="${c.code}"></td>
+                        <td th:text="${c.num_contrat}"></td>
+                        <td th:text="${c.etat} ? 'Actif' : 'Inactif'"></td>
                     </tr>
                 </tbody>
             </table>
@@ -62,47 +52,5 @@
 </body>
 </html>
 
-<div class="modal fade" id="modal-default">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Default Modal</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form enctype="multipart/form-data" action="#" id="form1" method="post">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="num_piece" class="col-form-label">Numéro piece:</label>
-                        <input type="text"  class="form-control" id="num_piece">
-                    </div>
-                    <div class="form-group">
-                        <label for="prenom" class="col-form-label">Prénom:</label>
-                        <input  type="text" class="form-control" id="prenom">
-                    </div>
-                    <div class="form-group">
-                        <label for="nom" class="col-form-label">Nom:</label>
-                        <input  type="text" class="form-control" id="nom">
-                    </div>
-                    <div class="form-group">
-                        <label for="tel" class="col-form-label">Téléphone:</label>
-                        <input type="text"  class="form-control" id="tel">
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
-                    <button id="save" type="submit" class="btn btn-primary">Enregister</button>
-                </div>
-                <input type="hidden"  id="medecinid">
-                <input type="hidden"  name="serviceId" id="serviceId">
-            </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 
 

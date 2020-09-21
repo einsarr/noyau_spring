@@ -1,6 +1,7 @@
 package devoir_spring_boot.spring_boot.model;
 
 
+import com.sun.istack.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -16,11 +17,9 @@ public class AlimenterCompte implements Serializable {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date_alimentation;
+    @NotNull
     @Column(name = "montant")
     private float montant;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Users user;
 
     @ManyToOne
     @JoinColumn(name = "compte_id")
@@ -50,13 +49,6 @@ public class AlimenterCompte implements Serializable {
         this.montant = montant;
     }
 
-    public Users getUser() {
-        return user;
-    }
-
-    public void setUser(Users user) {
-        this.user = user;
-    }
 
     public Compte getCompte() {
         return compte;

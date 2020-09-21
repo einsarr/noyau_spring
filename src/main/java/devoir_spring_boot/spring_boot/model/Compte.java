@@ -41,7 +41,7 @@ public class Compte implements Serializable {
     }
 
     public void setSolde(float solde) {
-        this.solde = solde;
+        this.solde += solde;
     }
 
     public Users getUser() {
