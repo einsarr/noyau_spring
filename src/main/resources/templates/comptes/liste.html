@@ -59,126 +59,103 @@
         </div>
         <!-- /.content -->
     </div>
+
+    <div class="modal fade" id="detailsCompteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="contentDetailsCompte">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Détails du compte</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="alimenterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >Alimenter un compte</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="form2" method="post" th:action="@{/comptes/alimenter}" th:object="${alimenterCompte}">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control"  id="idcompte" name="idcompte">
+                        </div>
+                        <div class="form-group">
+                            <label for="montant" class="col-form-label">Montant:</label>
+                            <input type="text"  name="montant" th:value="${alimenterCompte.montant}" class="form-control" id="montant">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Alimenter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="compte_nouveau_modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Nouveau compte</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form th:action="@{/comptes/add}"  id="form1" method="post" action="#" th:object="${compte}">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="prenom" class="col-form-label">Prénom:</label>
+                            <input  type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom du caissier">
+                        </div>
+                        <div class="form-group">
+                            <label for="nom" class="col-form-label">Nom:</label>
+                            <input  type="text"  class="form-control" name="nom" id="nom" placeholder="Nom caissier">
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="col-form-label">Username:</label>
+                            <input type="text"  class="form-control" name="username"  id="username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom" class="col-form-label">Etat:</label>
+                            <select name="etat" id="etat" class="form-control">
+                                <option value="">Selectionner l'etat du compte</option>
+                                <option value="1">Actif</option>
+                                <option value="0">Inactif</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="file" class="col-form-label">Photo:</label>
+                            <input accept=".png,.jpg, .jpeg" type="file"  name="photo" class="form-control" id="file">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                        <button id="save" type="submit" class="btn btn-primary">Enregister</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
 </div>
 </body>
 
 </html>
-
-<div class="modal fade" id="detailsCompteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content" id="contentDetailsCompte">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmModalLabel">Détails du compte</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="modal fade" id="alimenterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" >Alimenter un compte</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form id="form2" method="post" th:action="@{/comptes/alimenter}" th:object="${alimenterCompte}">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control"  id="idcompte" name="idcompte">
-                    </div>
-                    <div class="form-group">
-                        <label for="montant" class="col-form-label">Montant:</label>
-                        <input type="text"  name="montant" th:value="${alimenterCompte.montant}" class="form-control" id="montant">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Alimenter</button>
-                </div>
-                <input type="hidden" id="medecinId" name="medecinId">
-            </form>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade bd-example-modal-lg" id="compte_nouveau_modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Nouveau compte</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form th:action="@{/comptes/add}" id="form1" method="post" action="#" th:object="${compte}">
-                <div class="modal-body">
-                    <div id="div_envoi" class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="num_piece" class="col-form-label">Code:</label>
-                                <input type="text"  class="form-control" name="code" id="code" placeholder="Code du caissier">
-                            </div>
-                            <div class="form-group">
-                                <label for="prenom" class="col-form-label">Prénom:</label>
-                                <input  type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom du caissier">
-                            </div>
-                            <div class="form-group">
-                                <label for="nom" class="col-form-label">Nom:</label>
-                                <input  type="text"  class="form-control" name="nom" id="nom" placeholder="Nom caissier">
-                            </div>
-                            <div class="form-group">
-                                <label for="nom" class="col-form-label">Montant initiale:</label>
-                                <input  type="text" class="form-control" name="montant_init" id="montant_init" placeholder="Montant initiale déposé">
-                            </div>
-
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="tel" class="col-form-label">Username:</label>
-                                <input type="text"  class="form-control" name="username"  id="tel" placeholder="Username">
-                            </div>
-                            <div class="form-group">
-                                <label for="num_piece" class="col-form-label">Password:</label>
-                                <input type="password" name="password" class="form-control" id="num_piece" placeholder="Mot de passe">
-                            </div>
-                            <div class="form-group">
-                                <label for="prenom" class="col-form-label">Etat:</label>
-                                <select name="etat" id="etat" class="form-control">
-                                    <option value="">Selectionner l'etat du compte</option>
-                                    <option value="1">Actif</option>
-                                    <option value="0">Inactif</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="montant" class="col-form-label">Numéro contrat:</label>
-                                <input type="text" name="num_contrat" class="form-control" id="num_contrat" placeholder="Numéro contrat">
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
-                    <button id="save" type="submit" class="btn btn-primary">Enregister</button>
-                </div>
-                <input type="hidden"  id="medecinid">
-                <input type="hidden"  name="serviceId" id="serviceId">
-            </form>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->

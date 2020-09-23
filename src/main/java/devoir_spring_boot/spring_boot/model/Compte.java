@@ -59,4 +59,5 @@ public class Compte implements Serializable {
     public void setAlimenterComptes(List<AlimenterCompte> alimenterComptes) {
         this.alimenterComptes = alimenterComptes;
     }
+
 }

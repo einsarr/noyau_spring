@@ -4,7 +4,7 @@
       layout:decorator="assets/layout">
 <head>
     <meta charset="UTF-8"/>
-    <title>Transfert d'arget</title>
+    <title>Transfert d'argent</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -56,6 +56,7 @@
                         <td th:text="${o.caissier_rec.prenom}"></td>
                         <td th:text="${o.client_env.prenom}"></td>
                         <td th:text="${o.client_rec.prenom}"></td>
+
                     </tr>
                     </tbody>
                 </table>
@@ -79,80 +80,76 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form th:action="@{/operations/add}" id="form1" method="post" th:object="${operation}">
-                <div class="modal-body">
-                    <div class="col-md-6">
-                        <label for="type_operation">TYPE D'OPERATION</label>
-                        <select name="type_operation" id="type_operation" class="form-control">
-                            <option value="Envoi">Envoi</option>
-                            <option value="Retrait">Retrait</option>
-                        </select>
-                    </div>
-                    <hr>
-                    <div id="div_envoi" class="row">
+                <form th:action="@{/operations/add}" id="form1" method="post" th:object="${operation}">
+                    <div class="modal-body">
                         <div class="col-md-6">
-                            <h4 class="text-primary"><u>Informations sur l'envoyeur</u></h4>
-                            <div class="form-group">
-                                <label for="num_piece" class="col-form-label">Numéro piece:</label>
-                                <input type="text" name="num_piece" class="form-control" id="num_piece" placeholder="CNI de l'envoyeur">
+                            <label for="type_operation">TYPE D'OPERATION</label>
+                            <select name="type_operation" id="type_operation" class="form-control">
+                                <option value="Envoi">Envoi</option>
+                                <option value="Retrait">Retrait</option>
+                            </select>
+                        </div>
+                        <hr>
+                        <div id="div_envoi" class="row">
+                            <div class="col-md-6">
+                                <h4 class="text-primary"><u>Informations sur l'envoyeur</u></h4>
+                                <div class="form-group">
+                                    <label for="num_piece" class="col-form-label">Numéro piece:</label>
+                                    <input type="text" name="num_piece" class="form-control" id="num_piece" placeholder="CNI de l'envoyeur">
+                                </div>
+                                <div class="form-group">
+                                    <label for="prenom" class="col-form-label">Prénom:</label>
+                                    <input  type="text" name="prenom" class="form-control" id="prenom" placeholder="Prénom de l'envoyeur">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nom" class="col-form-label">Nom:</label>
+                                    <input  type="text" name="nom" class="form-control" id="nom" placeholder="Nom de l'envoyeur">
+                                </div>
+                                <div class="form-group">
+                                    <label for="montant" class="col-form-label">Montant:</label>
+                                    <input type="text" name="montant_envoi" class="form-control" id="montant" placeholder="Montant à envoyé">
+                                </div>
+                                <div class="form-group">
+                                    <label for="tel" class="col-form-label">Téléphone:</label>
+                                    <input type="text" name="tel" class="form-control" id="tel" placeholder="Téléphone de l'envoyeur">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="prenom" class="col-form-label">Prénom:</label>
-                                <input  type="text" name="prenom" class="form-control" id="prenom" placeholder="Prénom de l'envoyeur">
-                            </div>
-                            <div class="form-group">
-                                <label for="nom" class="col-form-label">Nom:</label>
-                                <input  type="text" name="nom" class="form-control" id="nom" placeholder="Nom de l'envoyeur">
-                            </div>
-                            <div class="form-group">
-                                <label for="montant" class="col-form-label">Montant:</label>
-                                <input type="text" name="montant" class="form-control" id="montant" placeholder="Montant à envoyé">
-                            </div>
-                            <div class="form-group">
-                                <label for="tel" class="col-form-label">Téléphone:</label>
-                                <input type="text" name="tel" class="form-control" id="tel" placeholder="Téléphone de l'envoyeur">
+
+                            <div class="col-md-6">
+                                <h4 class="text-info"><u>Informations sur le bénéficiaire</u></h4>
+                                <div class="form-group">
+                                    <label for="num_piece" class="col-form-label">Numéro téléphone:</label>
+                                    <input type="text"  class="form-control" id="num_piece" placeholder="Prénom du bénéficiaire">
+                                </div>
+                                <div class="form-group">
+                                    <label for="prenom" class="col-form-label">Prénom:</label>
+                                    <input  type="text" name="prenom_rec" class="form-control" id="prenom" placeholder="Prénom du bénéficiaire">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nom_rec" class="col-form-label">Nom:</label>
+                                    <input  type="text" name="nom_rec" class="form-control" id="nom_rec" placeholder="Nom du bénéficiaire">
+                                </div>
                             </div>
                         </div>
-
-                        <div class="col-md-6">
-                            <h4 class="text-info"><u>Informations sur le bénéficiaire</u></h4>
+                        <div id="div_retrait">
                             <div class="form-group">
-                                <label for="num_piece" class="col-form-label">Numéro téléphone:</label>
-                                <input type="text"  class="form-control" id="num_piece" placeholder="Prénom du bénéficiaire">
+                                <label for="num_piece_rec" class="col-form-label">Numéro piece:</label>
+                                <input type="text" name="num_piece_rec" class="form-control" id="num_piece_rec" placeholder="Prénom du bénéficiaire">
                             </div>
                             <div class="form-group">
-                                <label for="prenom" class="col-form-label">Prénom:</label>
-                                <input  type="text" name="prenom_rec" class="form-control" id="prenom" placeholder="Prénom du bénéficiaire">
-                            </div>
-                            <div class="form-group">
-                                <label for="nom" class="col-form-label">Nom:</label>
-                                <input  type="text" name="nom_rec" class="form-control" id="nom" placeholder="Nom du bénéficiaire">
+                                <label for="code_envoi_rec" class="col-form-label">Code d'envoi:</label>
+                                <input  type="text" name="code_envoi_rec" class="form-control" id="code_envoi_rec" placeholder="Code d'envoi">
                             </div>
                         </div>
                     </div>
-                    <div id="div_retrait">
-                        <div class="form-group">
-                            <label for="num_piece" class="col-form-label">Numéro piece:</label>
-                            <input type="text" name="num_piece_rec" class="form-control" id="num_piece" placeholder="Prénom du bénéficiaire">
-                        </div>
-                        <div class="form-group">
-                            <label for="code_envoi" class="col-form-label">Code d'envoi:</label>
-                            <input  type="text" name="code_env" class="form-control" id="code_envoi" placeholder="Code d'envoi">
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                        <button id="save" type="submit" class="btn btn-primary">Enregister</button>
                     </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
-                    <button id="save" type="submit" class="btn btn-primary">Enregister</button>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
 
 
 

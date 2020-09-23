@@ -1,6 +1,8 @@
 package devoir_spring_boot.spring_boot.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.istack.NotNull;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,18 +17,28 @@ public class Users {
     @Column(length = 10)
     private String code;
     @Column(length = 30)
+    @NotNull
     private String prenom;
     @Column(length = 25)
+    @NotNull
     private String nom;
+    @Column(length = 25,nullable = true)
+    private String num_piece;
+    @Column(length = 25,nullable = true)
+    private String contrats;
     @Column(length = 10)
     private String num_contrat;
     @Column(length = 50)
     private String username;
-    @Column(length = 255)
+    @Column(length = 255,nullable = true)
     private String password;
     @Column(length = 10)
     private boolean etat;
     private boolean changed;
+    @Column(length = 255)
+    private String photo;
+    //@Transient
+    //private MultipartFile[] files;
     @OneToMany(mappedBy = "caissier_env")
     private List<Operation> caissier_envois;
     @OneToMany(mappedBy = "caissier_rec")
@@ -144,6 +156,63 @@ public class Users {
 
     public void setRoles(List<Roles> roles) {
         this.roles = roles;
+    }
+
+    public String getNum_piece() {
+        return num_piece;
+    }
+
+    public void setNum_piece(String num_piece) {
+        this.num_piece = num_piece;
+    }
+
+    public String getContrats() {
+        return contrats;
+    }
+
+    public void setContrats(String contrats) {
+        this.contrats = contrats;
+    }
+
+    public boolean isEtat() {
+        return etat;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+/*
+    public MultipartFile[] getFiles() {
+        return files;
+    }
+
+    public void setFiles(MultipartFile[] files) {
+        this.files = files;
+    }*/
+
+    public String num_contrat_caissier(int n){
+        //choisissez un caractére au hasard à partir de cette chaîne
+        String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        StringBuilder s = new StringBuilder(n);
+        for (int i = 0; i < n; i++) {
+            int index = (int)(str.length() * Math.random());
+            s.append(str.charAt(index));
+        }
+        return s.toString();
+    }
+    public String code_caissier(){
+        String code="";
+        int n;
+        for(int i=0;i<6;i++)
+        {
+            n = (int)(Math.random() * 10);
+            code += n+"";
+        }
+        return code;
     }
 
 }

@@ -26,6 +26,7 @@
                     <th>Code</th>
                     <th>Numéro contrat</th>
                     <th>Etat</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -36,6 +37,7 @@
                         <td th:text="${c.code}"></td>
                         <td th:text="${c.num_contrat}"></td>
                         <td th:text="${c.etat} ? 'Actif' : 'Inactif'"></td>
+                        <td><a href="" class="btn btn-info"><span class="fas fa-eye"></span></a></td>
                     </tr>
                 </tbody>
             </table>

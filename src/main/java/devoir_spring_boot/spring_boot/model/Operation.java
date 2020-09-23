@@ -1,5 +1,6 @@
 package devoir_spring_boot.spring_boot.model;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -141,5 +142,34 @@ public class Operation implements Serializable {
 
     public void setCaissier_rec(Users caissier_rec) {
         this.caissier_rec = caissier_rec;
+    }
+
+    public String code_envoi(){
+        String code="";
+        int n;
+        for(int i=0;i<9;i++)
+        {
+            n = (int)(Math.random() * 10);
+            code += n+"";
+        }
+        return code;
+    }
+
+    @Override
+    public String toString() {
+        return "Operation{" +
+                "operation_id=" + operation_id +
+                ", code_envoi='" + code_envoi + '\'' +
+                ", date_envoi=" + date_envoi +
+                ", type_operation='" + type_operation + '\'' +
+                ", montant_envoi=" + montant_envoi +
+                ", frais_envoi=" + frais_envoi +
+                ", date_retrait=" + date_retrait +
+                ", etat_traitement=" + etat_traitement +
+                ", client_env=" + client_env +
+                ", client_rec=" + client_rec +
+                ", caissier_env=" + caissier_env +
+                ", caissier_rec=" + caissier_rec +
+                '}';
     }
 }
